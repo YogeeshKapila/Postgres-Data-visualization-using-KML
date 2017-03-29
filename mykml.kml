@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+<Style id="yogi">
+<IconStyle><Icon><href>http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png</href></Icon></IconStyle>
+</Style>
+<Placemark><name>HOME</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.286217,34.030696</coordinates></Point>
+</Placemark>
+<Placemark><name>WILSON DENTAL LIBRARY</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.285825,34.023994</coordinates></Point>
+</Placemark>
+<Placemark><name>CALIFORNIA PIZZA KITCHEN</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.286164,34.020490</coordinates></Point>
+</Placemark>
+<Placemark><name>LYON CENTRE</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.288807,34.024534</coordinates></Point>
+</Placemark>
+<Placemark><name>USC GOULD SCHOOL OF LAW</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.284351,34.018692</coordinates></Point>
+</Placemark>
+<Placemark><name>GALEN CENTRE</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.279952,34.021031</coordinates></Point>
+</Placemark>
+<Placemark><name>POWELL HALL</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.288858,34.019155</coordinates></Point>
+</Placemark>
+<Placemark><name>USC DEDEAUX STADIUM</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.289674,34.023114</coordinates></Point>
+</Placemark>
+<Placemark><name>USC DWORAK-PECK SCHOOL OF SOCIAL WORK</name>
+<styleUrl>#yogi</styleUrl><Point><coordinates>-118.282720,34.022365</coordinates></Point>
+</Placemark>
+
+<Placemark>
+<name>Convex Hull</name>
+<Polygon>
+<outerBoundaryIs>
+<LinearRing>
+<coordinates>
+-118.284351,34.018692000000001 
+-118.288858,34.019154999999998 
+-118.28967400000001,34.023114 
+-118.28621699999999,34.030695999999999 
+-118.27995199999999,34.021031000000001 
+-118.284351,34.018692000000001
+</coordinates>
+</LinearRing>
+</outerBoundaryIs>
+</Polygon>
+<Style>
+ <LineStyle>
+ <width>4.00</width>
+ </LineStyle>
+ <PolyStyle>  
+ <color>#501400FF</color>
+ <outline>1</outline>
+ <fill>1</fill>
+ </PolyStyle>
+ </Style>
+ </Placemark>
+
+<Placemark>
+<name>Nearest Neighbour 1</name>
+<styleUrl>#mystyle</styleUrl>
+<LineString>
+<coordinates>
+-118.28621699999999,34.030695999999999
+ -118.28880700000001,34.024534000000003
+ </coordinates>
+</LineString>
+</Placemark>
+
+<Placemark>
+<name>Nearest Neighbour 2</name>
+<styleUrl>#mystyle</styleUrl>
+<LineString>
+<coordinates>
+-118.28621699999999,34.030695999999999
+ -118.285825,34.023994000000002
+ </coordinates>
+</LineString>
+</Placemark>
+
+<Placemark>
+<name>Nearest Neighbour 3</name>
+<styleUrl>#mystyle</styleUrl>
+<LineString>
+<coordinates>
+-118.28621699999999,34.030695999999999
+-118.28967400000001,34.023114</coordinates>
+</LineString>
+</Placemark>
+
+<Style id="mystyle">
+ <LineStyle>
+ <width>4</width>
+ <color>#FF0000FF</color>
+ <gx:physicalWidth>12</gx:physicalWidth>
+ </LineStyle>
+ </Style>
+
+</Document>
+</kml>

@@ -1,0 +1,109 @@
+**************************************************
+ANSWERS
+**************************************************
+
+CREATE EXTENSION postgis;
+
+SELECT postgis_full_version();  //TESTING POSTGIS WORKING
+
+
+**************************************************
+CONVEX HULL QUERY: (QUERY 1)
+**************************************************
+
+select ST_AsKML(
+    st_convexhull(
+ ST_GeomFromKML('
+                      <LineString>
+                      <coordinates>
+                    -118.286217,34.030696
+		    -118.285825,34.023994 
+                    -118.286164,34.020490 
+                    -118.288807,34.024534 
+                    -118.284351,34.018692 
+                    -118.279952,34.021031 
+                    -118.288858,34.019155 
+                    -118.289674,34.023114 
+                    -118.282720,34.022365  
+                      </coordinates>					  
+		      </LineString>
+                      
+		')
+                )
+              );
+
+OUTPUT:  
+
+<Polygon><outerBoundaryIs><LinearRing><coordinates>-118.284351,34.018692000000001 -118.288858,34.019154999999998 -118.28967400000001,34.023114 -118.28621699999999,34.030695999999999 -118.27995199999999,34.021031000000001 -118.284351,34.018692000000001</coordinates></LinearRing></outerBoundaryIs></Polygon>
+
+
+
+****************************************************
+ NEAREST NEIGHBORS QUERY: (QUERY 2)
+****************************************************
+
+CREATE TABLE LOCATIONS (
+ID INTEGER,
+NAME VARCHAR(30),
+COORD POINT
+);
+
+
+insert into locations values (1,'HOME','(-118.286217,34.030696)');
+insert into locations values (2,'WILSON DENTAL LIBRARY','(-118.285825,34.023994)');
+insert into locations values (3,'CALIFORNIA PIZZA KITCHEN','(-118.286164,34.020490)');
+insert into locations values (4,'LYON CENTRE','(-118.288807,34.024534)');
+insert into locations values (5,'USC GOULD SCHOOL OF LAW','(-118.284351,34.018692)');
+insert into locations values (6,'GALEN CENTRE','(-118.279952,34.021031)');
+insert into locations values (7,'POWELL HALL','(-118.288858,34.019155)');
+insert into locations values (8,'USC DEDEAUX STADIUM','(-118.289674,34.023114)');
+insert into locations values (9,'USC SCHOOL OF SOCIAL WORK','(-118.282720,34.022365)');
+
+SELECT AddGeometryColumn ('locations','geom',4326,'POINT',2);
+
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.286217 34.030696)',4326) where id =1;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.285825 34.023994)',4326) where id =2;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.286164 34.020490)',4326) where id =3;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.288807 34.024534)',4326) where id =4;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.284351 34.018692)',4326) where id =5;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.279952 34.021031)',4326) where id =6;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.288858 34.019155)',4326) where id =7;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.289674 34.023114)',4326) where id =8;
+update locations set geom = ST_GEOMFROMTEXT('POINT(-118.282720 34.022365)',4326) where id =9;
+
+
+SELECT t2.id,t2.name, ST_Distance(t1.geom, t2.geom) AS nearest FROM locations t1, locations t2 WHERE t1.id = 1 and t2.id <>
+t1.id ORDER BY ST_Distance(t1.geom, t2.geom) LIMIT 3;
+
+
+3 NEAREST NEIGHBOURS OUTPUT:
+=================================
+
+id     name 				coord                    nearest
+*********************************************************************************************
+4   LYON CENTRE 		 (-118.288807,34.024534)    0.00668418611350822
+2   WILSON DENTAL LIBRARY        (-118.285825,34.023994)    0.00671345425246601
+8   USC DEDEAUX STADIUM          (-118.289674,34.023114)    0.00833292103647153
+
+
+
+select ST_AsKML(
+ ST_GeomFromKML('
+                      <LineString>
+                      <coordinates>
+                    -118.286217,34.030696
+		    -118.288807,34.024534
+                    -118.285825,34.023994
+                    -118.289674,34.023114
+                      </coordinates>
+		     </LineString>			
+		')
+    		);
+
+
+OUTPUT:
+
+<LineString><coordinates>-118.28621699999999,34.030695999999999  -118.28880700000001,34.024534000000003       -118.285825,34.023994000000002 -118.28967400000001,34.023114</coordinates></LineString>
+
+
+***************************************************************************************************************
