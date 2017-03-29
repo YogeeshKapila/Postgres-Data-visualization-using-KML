@@ -6,6 +6,6 @@ Project includes:
 2) Finding nearest neighbours to a given point and then visualize and verify results using .kml in Google Earth.
 3) Convex Hull formation of all the placemarks and then visualize and verify results using .kml in Google Earth.
 4) Construct a SPIROGRAPH to generate a set of coordinates (in java) centred around a placemark and then generate a .kml using POSTGRES
- to visulaize the geometry in Google earth.
+ to visulaize the geometry in Google earth. The path created could be used in a drone flight path for image and video capture
  
  # All the queries, screenshots, java code for coordinate generation and KML files have been uploaded ! 
